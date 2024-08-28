@@ -1,6 +1,6 @@
 import asyncHandler from "../middleware/asyncHandler.js";
 import User from "../models/userModel.js";
-import ErrorHandler from "../utils/errorHandlers.js";
+import {ErrorHandler} from "../utils/errorHandlers.js";
 import generateToken from "../utils/generateToken.js";
 
 
@@ -22,9 +22,7 @@ const loginUser = asyncHandler(async(req,res) =>{
             isAdmin:user.isAdmin
         });
     }else{
-        // res.status(401);
-        // throw new Error("Invalid email or password")
-        res.status(401).json({message:"Invalid email or password"})
+        throw new ErrorHandler("loginUser","Invalid email or password",401)
     }
 
 })

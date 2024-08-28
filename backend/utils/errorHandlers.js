@@ -2,11 +2,21 @@
 
 
 class ErrorHandler extends Error{
-    constructor(message,statusCode){
+    constructor(name, message, statusCode = 500, isTrusted = true, cause = null) {
         super(message);
-        this.statusCode= statusCode;
-        Error.captureStackTrace(this,this.constructor);
-    }
+        this.name = name;
+        this.message = message;
+        this.statusCode = statusCode;
+        this.isTrusted = isTrusted;
+        this.cause = cause;
+      }
 }
 
-export default ErrorHandler;
+
+class ValidationError extends ErrorHandler {
+    constructor(message, cause = null) {
+      super('ValidationError', message, 400, true, cause);
+    }
+  }
+
+export {ErrorHandler,ValidationError};

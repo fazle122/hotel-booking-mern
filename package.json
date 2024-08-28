@@ -1,5 +1,5 @@
 {
-  "name": "hotel-management",
+  "name": "hotel-booking",
   "version": "1.0.0",
   "description": "",
   "type": "module",
@@ -12,10 +12,12 @@
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.4.0",
     "cookie-parser": "^1.4.6",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.5.2"
+    "mongoose": "^8.5.2",
+    "sslcommerz-lts": "^1.1.0"
   },
   "devDependencies": {
     "dotenv": "^16.4.5",

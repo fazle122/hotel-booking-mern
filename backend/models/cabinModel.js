@@ -10,7 +10,7 @@ const cabinSchema = new mongoose.Schema({
         type:String,
         required:[true,'description is required']
     },
-    image:[{
+    images:[{
         imageId:String,
         url:String
     }],
@@ -26,6 +26,9 @@ const cabinSchema = new mongoose.Schema({
         type:Number,
         default:0,
     },
+    bookingCount:{
+        type:Number
+    }
 
 },{timestamps:true})
 

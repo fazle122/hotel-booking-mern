@@ -42,6 +42,9 @@ const bookingSchema = new mongoose.Schema({
         type:Boolean,
         required:[true,'IsPaid is required']
     },
+    tranId:{
+        type:String
+    },
     observations:{
         type:String,
     },

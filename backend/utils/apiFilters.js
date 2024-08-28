@@ -2,10 +2,11 @@
 
 class ApiFilters{
 
-    constructor(query, queryStr,reqUser) {
+    constructor(query, queryStr,reqUser,isPopulateData) {
         this.query = query;
         this.queryStr = queryStr;
         this.reqUser = reqUser;
+        this.isPopulateData = isPopulateData
       }
       search() {
         const keyword = this.queryStr.keyword
@@ -17,10 +18,18 @@ class ApiFilters{
             }
           : {};
         
-        if(this.reqUser.isAdmin){
-          this.query = this.query.find({ ...keyword }).populate('user','name email').populate('cabin','name');
+        if(this.reqUser && this.reqUser.isAdmin){
+          if(this.isPopulateData){
+            this.query = this.query.find({ ...keyword }).populate('user','name email').populate('cabin','name');
+          }else{
+            this.query = this.query.find({ ...keyword })
+          }
         }else{
-          this.query = this.query.find({ user:this.reqUser._id,...keyword }).populate('user','name email').populate('cabin','name');
+          if(this.isPopulateData){
+            this.query = this.query.find({ user:this.reqUser?._id,...keyword }).populate('user','name email').populate('cabin','name');
+          }else{
+            this.query = this.query.find({ user:this.reqUser?._id,...keyword })
+          }
         }
     
         return this;

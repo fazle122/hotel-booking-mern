@@ -4,8 +4,10 @@ import connectDB from "./config/db.js";
 import cabinRoutes from './routes/cabinRoute.js'
 import bookingRoutes from './routes/bookingRoute.js'
 import userRoutes from './routes/userRoute.js'
+import paymentRoutes from './routes/paymentRoute.js'
 import settingsRoutes from './routes/settingsRoute.js'
 import cookieParser   from 'cookie-parser';
+import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 
 dotenv.config({path:"backend/.env"});
@@ -16,7 +18,8 @@ const port = process.env.PORT || 3000;
 
 connectDB();
 const app = express();
-app.use(express.json());
+// app.use(express.json());
+app.use(express.json({limit:'2mb'}));
 app.use(express.urlencoded({extended:true}))
 app.use(cookieParser());
 
@@ -32,6 +35,12 @@ app.use('/api/cabins',cabinRoutes);
 app.use('/api/bookings',bookingRoutes);
 app.use('/api/users',userRoutes);
 app.use('/api/settings',settingsRoutes);
+app.use('/api/payment',paymentRoutes);
+
+
+app.use(notFound);
+app.use(errorHandler);
+
 
 const server = app.listen(port, () =>{
     console.log(`server is running ${port} in ${process.env.NODE_ENV} mode`)

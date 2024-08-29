@@ -10,8 +10,8 @@ import cookieParser   from 'cookie-parser';
 import { errorHandler, notFound } from "./middleware/errorMiddleware.js";
 
 
-dotenv.config({path:"backend/.env"});
-// dotenv.config({path:".env"});
+// dotenv.config({path:"backend/.env"});
+dotenv.config({path:".env"});
 const port = process.env.PORT || 3000;
 
 
